@@ -3,6 +3,10 @@ package hr.fer.zemris;
 import hr.fer.zemris.nenr.fuzzy.domain.DomainElement;
 import hr.fer.zemris.nenr.fuzzy.domain.IDomain;
 import hr.fer.zemris.nenr.fuzzy.domain.impl.Domain;
+import hr.fer.zemris.nenr.fuzzy.set.CalculatedFuzzySet;
+import hr.fer.zemris.nenr.fuzzy.set.IFuzzySet;
+import hr.fer.zemris.nenr.fuzzy.set.MutableFuzzySet;
+import hr.fer.zemris.nenr.fuzzy.unaryfunctions.StandardFuzzySets;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -58,6 +62,29 @@ class MainMethods {
         System.out.println(d3.elementForIndex(5));
         System.out.println(d3.elementForIndex(14));
         System.out.println(d3.indexOfElement(DomainElement.of(4, 1)));
+    }
+
+    @Test
+    @Disabled
+    public void zadaca1Zadatak2(){
+        IDomain d = Domain.intRange(0, 11); // {0,1,...,10}
+        IFuzzySet set1 = new MutableFuzzySet(d)
+                .set(DomainElement.of(0), 1.0)
+                .set(DomainElement.of(1), 0.8)
+                .set(DomainElement.of(2), 0.6)
+                .set(DomainElement.of(3), 0.4)
+                .set(DomainElement.of(4), 0.2);
+        DebugUtils.print(set1, "Set1:");
+        IDomain d2 = Domain.intRange(-5, 6); // {-5,-4,...,4,5}
+        IFuzzySet set2 = new CalculatedFuzzySet(
+                d2,
+                StandardFuzzySets.lambdaFunction(
+                        d2.indexOfElement(DomainElement.of(-4)),
+                        d2.indexOfElement(DomainElement.of( 0)),
+                        d2.indexOfElement(DomainElement.of( 4))
+                )
+        );
+        DebugUtils.print(set2, "Set2:");
     }
 
 }
