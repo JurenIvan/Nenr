@@ -1,8 +1,8 @@
-package hr.fer.zemris.nenr.domain;
+package hr.fer.zemris.nenr.fuzzy.domain;
 
-import hr.fer.zemris.nenr.domain.impl.CompositeDomain;
-import hr.fer.zemris.nenr.domain.impl.Domain;
-import hr.fer.zemris.nenr.domain.impl.SimpleDomain;
+import hr.fer.zemris.nenr.fuzzy.domain.impl.CompositeDomain;
+import hr.fer.zemris.nenr.fuzzy.domain.impl.Domain;
+import hr.fer.zemris.nenr.fuzzy.domain.impl.SimpleDomain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

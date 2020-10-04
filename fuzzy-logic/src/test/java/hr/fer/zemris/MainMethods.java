@@ -1,8 +1,8 @@
 package hr.fer.zemris;
 
-import hr.fer.zemris.nenr.domain.DomainElement;
-import hr.fer.zemris.nenr.domain.IDomain;
-import hr.fer.zemris.nenr.domain.impl.Domain;
+import hr.fer.zemris.nenr.fuzzy.domain.DomainElement;
+import hr.fer.zemris.nenr.fuzzy.domain.IDomain;
+import hr.fer.zemris.nenr.fuzzy.domain.impl.Domain;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

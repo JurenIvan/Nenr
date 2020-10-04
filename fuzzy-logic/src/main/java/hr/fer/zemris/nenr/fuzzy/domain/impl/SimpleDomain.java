@@ -1,7 +1,7 @@
-package hr.fer.zemris.nenr.domain.impl;
+package hr.fer.zemris.nenr.fuzzy.domain.impl;
 
-import hr.fer.zemris.nenr.domain.DomainElement;
-import hr.fer.zemris.nenr.domain.IDomain;
+import hr.fer.zemris.nenr.fuzzy.domain.DomainElement;
+import hr.fer.zemris.nenr.fuzzy.domain.IDomain;
 
 import java.util.Iterator;
 import java.util.Objects;

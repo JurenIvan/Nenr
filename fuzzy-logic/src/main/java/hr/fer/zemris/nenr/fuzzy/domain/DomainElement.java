@@ -1,4 +1,4 @@
-package hr.fer.zemris.nenr.domain;
+package hr.fer.zemris.nenr.fuzzy.domain;
 
 import java.util.Arrays;
 
