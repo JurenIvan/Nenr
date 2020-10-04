@@ -1,0 +1,3 @@
+rootProject.name = 'nenr'
+
+include 'fuzzy-logic'
