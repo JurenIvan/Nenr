@@ -11,10 +11,11 @@ public class SimpleDomain extends Domain {
     private final int first;
     private final int last;
 
-    public SimpleDomain(int first, int last) {
-        if (first >= last) throw new IllegalArgumentException("first must be smaller than second");
-        this.first = first;
-        this.last = last;
+    public SimpleDomain(int start, int end) {
+        if (start >= end) throw new IllegalArgumentException("First must be smaller than second");
+
+        this.first = start;
+        this.last = end;
     }
 
     public int getFirst() {
@@ -81,6 +82,7 @@ public class SimpleDomain extends Domain {
     public DomainElement elementForIndex(int index) {
         if (first + index > last || index < 0)
             throw new IllegalArgumentException();
+
         return DomainElement.of(first + index);
     }
 }

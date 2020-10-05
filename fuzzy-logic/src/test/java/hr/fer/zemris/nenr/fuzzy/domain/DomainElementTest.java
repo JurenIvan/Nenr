@@ -7,6 +7,6 @@ class DomainElementTest {
 
     @Test
     public void nullValuesInConstructor_exceptionIsThrown() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> DomainElement.of(null));
+        Assertions.assertThrows(NullPointerException.class, () -> DomainElement.of(null));
     }
 }

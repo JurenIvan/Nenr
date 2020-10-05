@@ -3,10 +3,7 @@ package hr.fer.zemris.nenr.fuzzy.domain.impl;
 import hr.fer.zemris.nenr.fuzzy.domain.DomainElement;
 import hr.fer.zemris.nenr.fuzzy.domain.IDomain;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -15,6 +12,8 @@ public class CompositeDomain extends Domain {
     private final IDomain[] domains;
 
     public CompositeDomain(IDomain... domains) {
+        Objects.requireNonNull(domains);
+
         this.domains = domains;
     }
 
@@ -26,14 +25,18 @@ public class CompositeDomain extends Domain {
     @Override
     public int getCardinality() {
         if (domains.length == 0) return 0;
+
         int product = 1;
-        for (var e : domains) product *= e.getCardinality();
+        for (var e : domains)
+            product *= e.getCardinality();
+
         return product;
     }
 
     @Override
     public int getNumberOfComponents() {
         int sum = 0;
+
         for (var domain : domains)
             sum += domain.getNumberOfComponents();
         return sum;
@@ -53,7 +56,7 @@ public class CompositeDomain extends Domain {
                 for (int i = 0; i < iterators.size(); i++) {
                     values[i] = iterators.get(i).next();
                 }
-                hasNext = true;
+                hasNext = iterators.stream().anyMatch(Iterator::hasNext);
             }
 
             @Override

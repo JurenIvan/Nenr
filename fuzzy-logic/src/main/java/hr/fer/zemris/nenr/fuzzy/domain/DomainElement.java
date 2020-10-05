@@ -1,6 +1,7 @@
 package hr.fer.zemris.nenr.fuzzy.domain;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static java.lang.String.valueOf;
 import static java.util.stream.Collectors.joining;
@@ -10,11 +11,14 @@ public class DomainElement {
     private final int[] values;
 
     private DomainElement(int... values) {
-        if (values == null) throw new IllegalArgumentException("Null values is not expected");
+        Objects.requireNonNull(values);
+
         this.values = values;
     }
 
     public static DomainElement of(int... values) {
+        Objects.requireNonNull(values);
+
         return new DomainElement(values);
     }
 
