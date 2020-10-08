@@ -3,6 +3,7 @@ package hr.fer.zemris.nenr.fuzzy.operations;
 import hr.fer.zemris.nenr.fuzzy.domain.DomainElement;
 import hr.fer.zemris.nenr.fuzzy.domain.impl.Domain;
 import hr.fer.zemris.nenr.fuzzy.set.MutableFuzzySet;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,6 +42,18 @@ class OperationsTest {
         assertEquals(0.3, calculatedSet.getValueAt(DomainElement.of(7)), 1e-4);
         assertEquals(0.2, calculatedSet.getValueAt(DomainElement.of(8)), 1e-4);
         assertEquals(0.1, calculatedSet.getValueAt(DomainElement.of(9)), 1e-4);
+
+    }
+
+    @Test
+    void binaryOperation_unequalDomain_throwsException() {
+        var fuzzySetUp = new MutableFuzzySet(Domain.intRange(0, 11));
+        var fuzzySetDown = new MutableFuzzySet(Domain.intRange(0, 10));
+        for (int i = 0; i < 10; i++) {
+            fuzzySetUp.set(DomainElement.of(i), i / 10.0);
+            fuzzySetDown.set(DomainElement.of(i), (10 - i) / 10.0);
+        }
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Operations.binaryOperation(fuzzySetUp, fuzzySetDown, Operations.zadehAnd()));
 
     }
 

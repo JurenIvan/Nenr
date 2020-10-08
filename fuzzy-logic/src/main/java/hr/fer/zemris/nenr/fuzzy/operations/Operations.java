@@ -28,6 +28,8 @@ public class Operations {
         Objects.requireNonNull(set1);
         Objects.requireNonNull(set2);
         Objects.requireNonNull(function);
+        if(!set1.getDomain().equals(set2.getDomain()))
+            throw new IllegalArgumentException("Sets must have equal domains");
 
         MutableFuzzySet newSet = new MutableFuzzySet(set1.getDomain());
         for (var elem : newSet.getDomain())
