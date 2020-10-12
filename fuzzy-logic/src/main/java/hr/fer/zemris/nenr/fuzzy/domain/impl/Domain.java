@@ -12,7 +12,17 @@ public abstract class Domain implements IDomain {
     }
 
     public static IDomain combine(IDomain first, IDomain second) {
-        return new CompositeDomain(first, second);
+        int numberOfFirstComponents = first.getNumberOfComponents();
+        int numberOfSecondComponents = second.getNumberOfComponents();
+
+        SimpleDomain[] domains = new SimpleDomain[numberOfFirstComponents + numberOfSecondComponents];
+
+        for (int i = 0; i < numberOfFirstComponents; i++)
+            domains[i] = (SimpleDomain) first.getComponent(i);
+        for (int i = 0; i < numberOfSecondComponents; i++)
+            domains[i + numberOfFirstComponents] = (SimpleDomain) second.getComponent(i);
+
+        return new CompositeDomain(domains);
     }
 
     @Override

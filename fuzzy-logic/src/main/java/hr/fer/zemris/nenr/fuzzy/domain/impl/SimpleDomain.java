@@ -80,9 +80,13 @@ public class SimpleDomain extends Domain {
 
     @Override
     public DomainElement elementForIndex(int index) {
+        return DomainElement.of(valueForIndex(index));
+    }
+
+    public int valueForIndex(int index) {
         if (first + index > last || index < 0)
             throw new IllegalArgumentException();
 
-        return DomainElement.of(first + index);
+        return first + index;
     }
 }

@@ -37,7 +37,7 @@ class CompositeDomainTest {
         IDomain sd1 = new SimpleDomain(100, 102);
         IDomain sd2 = new SimpleDomain(10, 12);
         IDomain sd3 = new SimpleDomain(0, 2);
-        IDomain cd = new CompositeDomain(sd1, new CompositeDomain(sd2, sd3));
+        IDomain cd = Domain.combine(sd1, Domain.combine(sd2, sd3));
 
         Assertions.assertEquals(DomainElement.of(100, 10, 0), cd.elementForIndex(0));
         Assertions.assertEquals(DomainElement.of(100, 10, 1), cd.elementForIndex(1));
@@ -54,7 +54,7 @@ class CompositeDomainTest {
         IDomain sd1 = new SimpleDomain(100, 102);
         IDomain sd2 = new SimpleDomain(10, 12);
         IDomain sd3 = new SimpleDomain(0, 2);
-        IDomain cd = new CompositeDomain(sd1, new CompositeDomain(sd2, sd3));
+        IDomain cd = Domain.combine(sd1, Domain.combine(sd2, sd3));
 
         Assertions.assertEquals(8, cd.getCardinality());
     }

@@ -3,17 +3,16 @@ package hr.fer.zemris.nenr.fuzzy.domain.impl;
 import hr.fer.zemris.nenr.fuzzy.domain.DomainElement;
 import hr.fer.zemris.nenr.fuzzy.domain.IDomain;
 
-import java.util.*;
-
-import static java.util.stream.Collectors.toList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class CompositeDomain extends Domain {
 
-    private final IDomain[] domains;
+    private final SimpleDomain[] domains;
 
-    public CompositeDomain(IDomain... domains) {
+    public CompositeDomain(SimpleDomain... domains) {
         Objects.requireNonNull(domains);
-
         this.domains = domains;
     }
 
@@ -35,29 +34,15 @@ public class CompositeDomain extends Domain {
 
     @Override
     public int getNumberOfComponents() {
-        int sum = 0;
-
-        for (var domain : domains)
-            sum += domain.getNumberOfComponents();
-        return sum;
+        return domains.length;
     }
 
     @Override
     public Iterator<DomainElement> iterator() {
         return new Iterator<>() {
 
-            private final List<Iterator<DomainElement>> iterators;
-            private final DomainElement[] values;
-            private boolean hasNext;
-
-            {
-                iterators = Arrays.stream(domains).map(Iterable::iterator).collect(toList());
-                values = new DomainElement[iterators.size()];
-                for (int i = 0; i < iterators.size(); i++) {
-                    values[i] = iterators.get(i).next();
-                }
-                hasNext = iterators.stream().anyMatch(Iterator::hasNext);
-            }
+            private final int[] currentElement = new int[getNumberOfComponents()];
+            private boolean hasNext = true;
 
             @Override
             public boolean hasNext() {
@@ -68,34 +53,30 @@ public class CompositeDomain extends Domain {
             public DomainElement next() {
                 if (!hasNext) throw new NoSuchElementException();
 
-                DomainElement elementToReturn = composeCurrentElement();
+                DomainElement elementToReturn = composeCurrent();
                 prepareNext();
                 return elementToReturn;
             }
 
+            private DomainElement composeCurrent() {
+                int[] values = new int[currentElement.length];
+                for (int i = 0; i < values.length; i++) {
+                    values[i] = domains[i].valueForIndex(currentElement[i]);
+                }
+                return DomainElement.of(values);
+            }
+
             private void prepareNext() {
-                for (int i = iterators.size() - 1; i >= 0; i--) {
-                    if (iterators.get(i).hasNext()) {
-                        values[i] = iterators.get(i).next();
+                for (int i = currentElement.length - 1; i >= 0; i--) {
+                    if (domains[i].getCardinality() - 1 > currentElement[i]) {
+                        currentElement[i] = currentElement[i] + 1;
                         hasNext = true;
                         return;
                     } else {
-                        iterators.set(i, getComponent(i).iterator());
-                        values[i] = iterators.get(i).next();
+                        currentElement[i] = 0;
                     }
                 }
                 hasNext = false;
-            }
-
-            private DomainElement composeCurrentElement() {
-                int[] returnArr = new int[getNumberOfComponents()];
-                int counter = 0;
-                for (DomainElement value : values) {
-                    for (int j = 0; j < value.getNumberOfComponents(); j++) {
-                        returnArr[counter++] = value.getComponentValue(j);
-                    }
-                }
-                return DomainElement.of(returnArr);
             }
         };
     }
