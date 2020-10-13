@@ -6,11 +6,7 @@ import hr.fer.zemris.nenr.fuzzy.domain.impl.SimpleDomain;
 import hr.fer.zemris.nenr.fuzzy.set.IFuzzySet;
 import hr.fer.zemris.nenr.fuzzy.set.MutableFuzzySet;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-
-import static java.lang.Double.MIN_VALUE;
 
 public class Relations {
 
@@ -18,18 +14,7 @@ public class Relations {
     }
 
     public static boolean isUtimesURelation(IFuzzySet relation) {
-        if (relation.getDomain().getNumberOfComponents() != 2)
-            return false;
-
-        List<DomainElement> d1Elements = new ArrayList<>();
-        relation.getDomain().getComponent(0).forEach(d1Elements::add);
-        List<DomainElement> d2Elements = new ArrayList<>();
-        relation.getDomain().getComponent(1).forEach(d2Elements::add);
-
-        if (!d1Elements.stream().allMatch(d2Elements::remove))
-            return false;
-
-        return d2Elements.size() == 0;
+        return relation.getDomain().getNumberOfComponents() == 2 && relation.getDomain().getComponent(0).equals(relation.getDomain().getComponent(1));
     }
 
     public static boolean isSymmetric(IFuzzySet relation) {
@@ -71,21 +56,34 @@ public class Relations {
         if (!isUtimesURelation(relation))
             return false;
 
+        for (var x : relation.getDomain().getComponent(0)) {
+            for (var z : relation.getDomain().getComponent(0)) {
+                double value = relation.getValueAt(DomainElement.of(x.getComponentValue(0), z.getComponentValue(0)));
+                double max = 0;
+                for (var y : relation.getDomain().getComponent(0)) {
+                    var de1 = DomainElement.of(x.getComponentValue(0), y.getComponentValue(0));
+                    var de2 = DomainElement.of(y.getComponentValue(0), z.getComponentValue(0));
+                    max = Math.max(max, Math.min(relation.getValueAt(de1), relation.getValueAt(de2)));
+                }
+                if (value < max)
+                    return false;
+            }
+        }
         return true;
     }
 
     public static IFuzzySet compositionOfBinaryRelations(IFuzzySet relation1, IFuzzySet relation2) {
-        var f1 = (SimpleDomain) relation1.getDomain().getComponent(0);  //redci
-        var f2 = (SimpleDomain) relation1.getDomain().getComponent(1);  //stupci
-        var s1 = (SimpleDomain) relation2.getDomain().getComponent(0);  //redci
-        var s2 = (SimpleDomain) relation2.getDomain().getComponent(1);  //stupci
+        var f1 = (SimpleDomain) relation1.getDomain().getComponent(0);
+        var f2 = (SimpleDomain) relation1.getDomain().getComponent(1);
+        var s1 = (SimpleDomain) relation2.getDomain().getComponent(0);
+        var s2 = (SimpleDomain) relation2.getDomain().getComponent(1);
         if (!f2.equals(s1)) throw new IllegalArgumentException();
 
         var r3 = new MutableFuzzySet(Domain.combine(f1, s2));
 
         for (var e1 : f1) {
             for (var e2 : s2) {
-                double currentMax = MIN_VALUE;
+                double currentMax = 0;
                 for (var e3 : f2) {
                     currentMax = Math.max(currentMax, Math.min(
                             relation1.getValueAt(DomainElement.of(e1.getComponentValue(0), e3.getComponentValue(0))),
@@ -99,6 +97,6 @@ public class Relations {
     }
 
     public static boolean isFuzzyEquivalence(IFuzzySet relation) {
-        return Relations.isSymmetric(relation) && Relations.isReflexive(relation) && Relations.isMaxMinTransitive(relation);
+        return isSymmetric(relation) && isReflexive(relation) && isMaxMinTransitive(relation);
     }
 }
