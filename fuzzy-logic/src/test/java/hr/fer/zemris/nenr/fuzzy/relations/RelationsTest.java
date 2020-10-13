@@ -139,12 +139,60 @@ class RelationsTest {
 
         r2 = Relations.compositionOfBinaryRelations(r2, r);
         assertFalse(Relations.isFuzzyEquivalence(r2));
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(1, 1)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(1, 2)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(1, 3)), 1e-8);
+        assertEquals(0.0, r2.getValueAt(DomainElement.of(1, 4)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(2, 1)), 1e-8);
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(2, 2)), 1e-8);
+        assertEquals(0.5, r2.getValueAt(DomainElement.of(2, 3)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(2, 4)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(3, 1)), 1e-8);
+        assertEquals(0.5, r2.getValueAt(DomainElement.of(3, 2)), 1e-8);
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(3, 3)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(3, 4)), 1e-8);
+        assertEquals(0.0, r2.getValueAt(DomainElement.of(4, 1)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(4, 2)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(4, 3)), 1e-8);
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(4, 4)), 1e-8);
 
         r2 = Relations.compositionOfBinaryRelations(r2, r);
         assertTrue(Relations.isFuzzyEquivalence(r2));
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(1, 1)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(1, 2)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(1, 3)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(1, 4)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(2, 1)), 1e-8);
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(2, 2)), 1e-8);
+        assertEquals(0.5, r2.getValueAt(DomainElement.of(2, 3)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(2, 4)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(3, 1)), 1e-8);
+        assertEquals(0.5, r2.getValueAt(DomainElement.of(3, 2)), 1e-8);
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(3, 3)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(3, 4)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(4, 1)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(4, 2)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(4, 3)), 1e-8);
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(4, 4)), 1e-8);
 
         r2 = Relations.compositionOfBinaryRelations(r2, r);
         assertTrue(Relations.isFuzzyEquivalence(r2));
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(1, 1)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(1, 2)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(1, 3)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(1, 4)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(2, 1)), 1e-8);
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(2, 2)), 1e-8);
+        assertEquals(0.5, r2.getValueAt(DomainElement.of(2, 3)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(2, 4)), 1e-8);
+        assertEquals(0.3, r2.getValueAt(DomainElement.of(3, 1)), 1e-8);
+        assertEquals(0.5, r2.getValueAt(DomainElement.of(3, 2)), 1e-8);
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(3, 3)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(3, 4)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(4, 1)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(4, 2)), 1e-8);
+        assertEquals(0.2, r2.getValueAt(DomainElement.of(4, 3)), 1e-8);
+        assertEquals(1.0, r2.getValueAt(DomainElement.of(4, 4)), 1e-8);
     }
 
     @Test
