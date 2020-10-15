@@ -11,7 +11,7 @@ import hr.fer.zemris.nenr.fuzzy.unaryfunctions.StandardFuzzySets;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class MainMethods {
+class MainMethodsZad1 {
 
     /**
      * Expected output:
