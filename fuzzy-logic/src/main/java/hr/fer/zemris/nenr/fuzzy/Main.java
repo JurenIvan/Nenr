@@ -1,6 +1,6 @@
 package hr.fer.zemris.nenr.fuzzy;
 
-import hr.fer.zemris.nenr.fuzzy.defuzzifier.COADefuzzifier;
+import hr.fer.zemris.nenr.fuzzy.defuzzifier.COADefuzzyfier;
 import hr.fer.zemris.nenr.fuzzy.defuzzifier.Defuzzifier;
 import hr.fer.zemris.nenr.fuzzy.system.AkcelFuzzySystemMin;
 import hr.fer.zemris.nenr.fuzzy.system.FuzzySystem;
@@ -18,19 +18,20 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Defuzzifier def = new COADefuzzifier();
+        Defuzzifier def = new COADefuzzyfier();
+
         FuzzySystem fsAkcel = new AkcelFuzzySystemMin(def);
         FuzzySystem fsKormilo = new KormiloFuzzySystemMin(def);
-        int h=0;
+
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            if (line.equals(END_CONDITION))
-                break;
+            if (line.equals(END_CONDITION)) break;
+
             Map<String, Integer> inParsed = parseIntoMap(line);
-            System.err.println(inParsed);
+
             double a = fsAkcel.conclude(inParsed);
             double k = fsKormilo.conclude(inParsed);
-            System.out.flush();
+
             System.out.println(Math.round(a) + " " + Math.round(k));
             System.out.flush();
         }

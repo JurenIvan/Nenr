@@ -1,19 +1,18 @@
 package hr.fer.zemris.nenr.fuzzy.system;
 
 import hr.fer.zemris.nenr.fuzzy.defuzzifier.Defuzzifier;
+import hr.fer.zemris.nenr.fuzzy.rule.IRule;
 
-import java.util.Map;
+import java.util.List;
 
-public class KormiloFuzzySystemMin implements FuzzySystem {
-
-    private final Defuzzifier defuzzifier;
+public class KormiloFuzzySystemMin extends AbstractFuzzySystem {
 
     public KormiloFuzzySystemMin(Defuzzifier defuzzifier) {
-        this.defuzzifier = defuzzifier;
+        super(defuzzifier);
     }
 
     @Override
-    public double conclude(Map<String, Integer> input) {
-        return 0;
+    public List<IRule> addRules() {
+        return List.of();
     }
 }
