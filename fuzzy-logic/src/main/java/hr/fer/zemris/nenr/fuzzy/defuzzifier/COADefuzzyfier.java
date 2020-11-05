@@ -4,7 +4,7 @@ import hr.fer.zemris.nenr.fuzzy.set.IFuzzySet;
 
 public class COADefuzzyfier implements Defuzzifier {
     @Override
-    public Double defuzzify(IFuzzySet fuzzySet) {
+    public double defuzzify(IFuzzySet fuzzySet) {
         double nominator = 0, denominator = 0;
 
         for (var de : fuzzySet.getDomain()) {

@@ -4,5 +4,5 @@ import hr.fer.zemris.nenr.fuzzy.set.IFuzzySet;
 
 public interface Defuzzifier {
 
-    Double defuzzify(IFuzzySet fuzzySet);
+    double defuzzify(IFuzzySet fuzzySet);
 }
