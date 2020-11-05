@@ -21,7 +21,7 @@ jar {
     mainClassName = 'hr.fer.zemris.nenr.fuzzy.Main'
     manifest {
         attributes(
-                'Main-Class': 'hr.fer.zemris.nenr.fuzzy.Main'
+                'Main-Class': 'hr.fer.zemris.nenr.fuzzy.BoatController'
         )
     }
 }

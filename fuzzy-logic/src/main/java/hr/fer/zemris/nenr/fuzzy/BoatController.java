@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
-public class Main {
+public class BoatController {
 
     private static final String END_CONDITION = "KRAJ";
 
