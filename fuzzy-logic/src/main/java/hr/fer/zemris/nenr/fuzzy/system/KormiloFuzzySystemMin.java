@@ -26,10 +26,10 @@ public class KormiloFuzzySystemMin extends AbstractFuzzySystem {
 //                new SimpleRule("L", BoatDomains.CLOSE, BoatDomains.TURN_RIGHT),
 //                new SimpleRule("D", BoatDomains.CLOSE, BoatDomains.TURN_LEFT),
 
-                new SimpleRule("L", BoatDomains.REALLY_CLOSE, BoatDomains.TURN_RIGHT_HARD),
-                new SimpleRule("D", BoatDomains.REALLY_CLOSE, BoatDomains.TURN_LEFT_HARD),
-                new SimpleRule("LK", BoatDomains.REALLY_CLOSE, BoatDomains.TURN_RIGHT_HARD),
-                new SimpleRule("DK", BoatDomains.REALLY_CLOSE, BoatDomains.TURN_LEFT_HARD),
+                new SimpleRule("L", BoatDomains.REALLY_CLOSE, BoatDomains.TURN_RIGHT),
+                new SimpleRule("D", BoatDomains.REALLY_CLOSE, BoatDomains.TURN_LEFT),
+//                new SimpleRule("LK", BoatDomains.REALLY_CLOSE, BoatDomains.TURN_RIGHT_HARD),
+//                new SimpleRule("DK", BoatDomains.REALLY_CLOSE, BoatDomains.TURN_LEFT_HARD),
 
                 new SimpleRule("S", BoatDomains.WRONG_DIRECTION, BoatDomains.TURN_RIGHT_HARD),
                 compositeRule

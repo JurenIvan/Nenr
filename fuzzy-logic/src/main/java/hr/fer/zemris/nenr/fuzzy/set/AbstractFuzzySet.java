@@ -15,7 +15,7 @@ public abstract class AbstractFuzzySet implements IFuzzySet {
     }
 
     public String toString() {
-        return "MutableFuzzySet{\n" +
+        return "FuzzySet{\n" +
                 StreamSupport.stream(getDomain().spliterator(), false)
                         .map(e -> e + " : " + getValueAt(e))
                         .collect(Collectors.joining("\n"))
