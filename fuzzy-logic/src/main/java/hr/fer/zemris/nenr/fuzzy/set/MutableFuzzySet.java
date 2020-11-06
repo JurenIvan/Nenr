@@ -5,32 +5,26 @@ import hr.fer.zemris.nenr.fuzzy.domain.IDomain;
 
 import java.util.Objects;
 
-public class MutableFuzzySet implements IFuzzySet {
+public class MutableFuzzySet extends AbstractFuzzySet {
 
     private final double[] memberships;
-    private final IDomain domain;
 
     public MutableFuzzySet(IDomain domain) {
+        super(domain);
         Objects.requireNonNull(domain);
 
-        this.domain = domain;
         memberships = new double[domain.getCardinality()];
-    }
-
-    @Override
-    public IDomain getDomain() {
-        return domain;
     }
 
     @Override
     public double getValueAt(DomainElement element) {
         Objects.requireNonNull(element);
-        return memberships[domain.indexOfElement(element)];
+        return memberships[getDomain().indexOfElement(element)];
     }
 
     public MutableFuzzySet set(DomainElement element, double value) {
         Objects.requireNonNull(element);
-        memberships[domain.indexOfElement(element)] = value;
+        memberships[getDomain().indexOfElement(element)] = value;
         return this;
     }
 }
