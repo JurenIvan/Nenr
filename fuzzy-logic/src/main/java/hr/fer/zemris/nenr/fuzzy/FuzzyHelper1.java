@@ -8,6 +8,8 @@ import hr.fer.zemris.nenr.fuzzy.system.KormiloFuzzySystemMin;
 
 import java.util.Scanner;
 
+import static java.lang.Integer.*;
+
 public class FuzzyHelper1 {
 
     private static final Defuzzifier defuzzifier = new COADefuzzyfier();
@@ -22,11 +24,12 @@ public class FuzzyHelper1 {
             afs = new AkcelFuzzySystemMin(defuzzifier);
         else
             afs = new KormiloFuzzySystemMin(defuzzifier);
+
         System.out.println("Rule order [int<" + afs.getRules().size() + "]:");
-        int index = Integer.parseInt(sc.nextLine());
+        int index = parseInt(sc.nextLine());
+
         System.out.println("Input params [6 values separated by spaces]:");
-        String line = sc.nextLine();
-        var input = BoatController.parseInputIntoMap(line);
+        var input = BoatController.parseInputIntoMap(sc.nextLine());
 
         System.out.println("Conclusion:");
         System.out.println(afs.getRules().get(index).conclude(input));
