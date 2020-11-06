@@ -27,7 +27,7 @@ public class BoatController {
             String line = sc.nextLine();
             if (line.equals(END_CONDITION)) break;
 
-            Map<String, Integer> inParsed = parseIntoMap(line);
+            Map<String, Integer> inParsed = parseInputIntoMap(line);
 
             double a = fsAkcel.conclude(inParsed);
             double k = fsKormilo.conclude(inParsed);
@@ -37,7 +37,7 @@ public class BoatController {
         }
     }
 
-    private static Map<String, Integer> parseIntoMap(String hasNextLine) {
+    public static Map<String, Integer> parseInputIntoMap(String hasNextLine) {
         String[] parsedInput = hasNextLine.split("\\s+");
         HashMap<String, Integer> map = new HashMap<>();
 
