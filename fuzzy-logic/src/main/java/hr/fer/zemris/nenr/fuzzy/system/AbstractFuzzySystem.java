@@ -27,4 +27,8 @@ public abstract class AbstractFuzzySystem implements FuzzySystem {
             ifs = binaryOperation(ifs, rule.conclude(input), zadehOr());
         return defuzzifier.defuzzify(ifs);
     }
+
+    public List<IRule> getRules() {
+        return rules;
+    }
 }
