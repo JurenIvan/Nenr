@@ -1,15 +1,16 @@
 package hr.fer.zemris.nenr.ga;
 
-import hr.fer.zemris.nenr.ga.breeder.SidedAverageBreeder;
 import hr.fer.zemris.nenr.ga.evaluator.FunctionEvaluator;
 import hr.fer.zemris.nenr.ga.evaluator.IFunction;
 import hr.fer.zemris.nenr.ga.initializer.PopulationInitializer;
 import hr.fer.zemris.nenr.ga.mutator.NormalNoiseMutator;
+import hr.fer.zemris.nenr.ga.selection.GenerationalSelection;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.util.stream.Collectors;
 
+import static hr.fer.zemris.nenr.ga.GeneticAlgorithm.GeneticAlgorithmHistory;
 import static java.lang.Math.*;
 
 public class Main {
@@ -29,12 +30,19 @@ public class Main {
         var entryProvider = new EntryProvider(INPUT_FILE_PATH_CLEAN);
         var populationInitializer = new PopulationInitializer(100, -4, 4);
         var evaluator = new FunctionEvaluator(entryProvider, FUNCTION);
+//        var mutator = new NormalNoiseMutator(0.5, 1);
+//        var breeder = new SidedAverageBreeder(0.5);
+//        var selector = new TournamentSelection(breeder, evaluator, mutator);
+//        var selector = new TournamentModifiedSelection(breeder, evaluator, mutator);
         var mutator = new NormalNoiseMutator(0.5, 0.01);
-        var breeder = new SidedAverageBreeder(0.5);
+        var selector = new GenerationalSelection(mutator, 0.3);
 
-        var geneticAlgorithm = new GeneticAlgorithm(mutator, evaluator, populationInitializer, breeder, 10, 10000);
+        var geneticAlgorithm = new GeneticAlgorithm<>(mutator, evaluator, populationInitializer, selector, 5000, true);
 
         geneticAlgorithm.train();
-        System.out.println(Arrays.toString(geneticAlgorithm.getFittest().getCromosomes()));
+        System.out.println(geneticAlgorithm.getFittest());
+        System.out.println(geneticAlgorithm.getHistory().stream().map(GeneticAlgorithmHistory::toString).collect(Collectors.joining("\n")));
+
+
     }
 }

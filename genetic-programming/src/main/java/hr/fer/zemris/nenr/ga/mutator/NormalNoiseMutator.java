@@ -1,8 +1,10 @@
 package hr.fer.zemris.nenr.ga.mutator;
 
-import hr.fer.zemris.nenr.ga.Instance;
+import hr.fer.zemris.nenr.ga.domain.Instance;
 
 import java.util.Random;
+
+import static java.lang.Math.*;
 
 public class NormalNoiseMutator implements Mutator<Instance> {
 
@@ -24,8 +26,8 @@ public class NormalNoiseMutator implements Mutator<Instance> {
 
     @Override
     public void mutate(Instance instance) {
-        for (int i = 0; i < instance.getCromosomes().length; i++)
-            if (Math.random() < mutationChance)
-                instance.getCromosomes()[i] += mean + random.nextGaussian() * deviation;
+        for (int i = 0; i < instance.getChromosomes().length; i++)
+            if (random() < mutationChance)
+                instance.getChromosomes()[i] += mean + random.nextGaussian() * deviation;
     }
 }

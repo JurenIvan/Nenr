@@ -1,7 +1,7 @@
 package hr.fer.zemris.nenr.ga.evaluator;
 
 import hr.fer.zemris.nenr.ga.EntryProvider;
-import hr.fer.zemris.nenr.ga.Instance;
+import hr.fer.zemris.nenr.ga.domain.Instance;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +26,7 @@ public class FunctionEvaluator implements Evaluator<Instance> {
     public double evaluate(Instance instance) {
         double err = 0;
         for (var tuple : values) {
-            err += errorCollectingFuction.apply(tuple[2], function.valueAt(Arrays.copyOf(tuple, 2), instance.getCromosomes()));
+            err += errorCollectingFuction.apply(tuple[2], function.valueAt(Arrays.copyOf(tuple, 2), instance.getChromosomes()));
         }
         return err;
     }

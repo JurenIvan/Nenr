@@ -1,6 +1,6 @@
 package hr.fer.zemris.nenr.ga.breeder;
 
-import hr.fer.zemris.nenr.ga.Instance;
+import hr.fer.zemris.nenr.ga.domain.Instance;
 
 public class SidedAverageBreeder implements Breeder<Instance> {
 
@@ -14,17 +14,17 @@ public class SidedAverageBreeder implements Breeder<Instance> {
     public Instance mate(Instance father, Instance mother) {
         double[] better;
         double[] worse;
-        double[] chromosome = new double[father.getCromosomes().length];
+        double[] chromosome = new double[father.getChromosomes().length];
 
         if (father.getFitness() < mother.getFitness()) {
-            better = father.getCromosomes();
-            worse = mother.getCromosomes();
+            better = father.getChromosomes();
+            worse = mother.getChromosomes();
         } else {
-            better = mother.getCromosomes();
-            worse = father.getCromosomes();
+            better = mother.getChromosomes();
+            worse = father.getChromosomes();
         }
 
-        for (int i = 0; i < father.getCromosomes().length; i++)
+        for (int i = 0; i < father.getChromosomes().length; i++)
             chromosome[i] = ((1 + sidedToBetterFactor) * better[i] + (1 - sidedToBetterFactor) * worse[i]) / 2;
 
         return new Instance(chromosome);

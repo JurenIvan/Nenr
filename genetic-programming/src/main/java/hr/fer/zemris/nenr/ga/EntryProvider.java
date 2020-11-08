@@ -2,11 +2,11 @@ package hr.fer.zemris.nenr.ga;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 
 import static java.lang.Double.parseDouble;
 import static java.nio.file.Files.readAllLines;
+import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
 
 public class EntryProvider {
@@ -29,6 +29,6 @@ public class EntryProvider {
     }
 
     public List<double[]> provideSamples() {
-        return Collections.unmodifiableList(samples);
+        return unmodifiableList(samples);
     }
 }
