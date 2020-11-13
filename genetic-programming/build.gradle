@@ -16,6 +16,16 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
+jar {
+    classifier = 'boot'
+    mainClassName = 'hr.fer.zemris.nenr.fuzzy.Main'
+    manifest {
+        attributes(
+                'Main-Class': 'hr.fer.zemris.nenr.ga.Main'
+        )
+    }
+}
+
 test {
     useJUnitPlatform()
 
