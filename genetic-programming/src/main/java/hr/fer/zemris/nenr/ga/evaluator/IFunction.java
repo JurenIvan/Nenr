@@ -2,5 +2,5 @@ package hr.fer.zemris.nenr.ga.evaluator;
 
 public interface IFunction {
 
-    double valueAt(double[] x, double[] koef);
+    double valueAt(double[] x, double[] coefficients);
 }

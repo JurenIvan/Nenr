@@ -10,6 +10,9 @@ import java.util.List;
 import static java.lang.Math.max;
 import static java.util.Comparator.comparing;
 
+/**
+ * Replaces worst n/3 intances with children of best 2/3
+ */
 public class TournamentSelection implements Selection<Instance> {
 
     private final Breeder<Instance> breeder;

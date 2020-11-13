@@ -2,11 +2,11 @@ package hr.fer.zemris.nenr.ga.breeder;
 
 import hr.fer.zemris.nenr.ga.domain.Instance;
 
-public class SidedAverageBreeder implements Breeder<Instance> {
+public class CopyChromosome implements Breeder<Instance> {
 
     private final double sidedToBetterFactor;
 
-    public SidedAverageBreeder(double sidedToBetterFactor) {
+    public CopyChromosome(double sidedToBetterFactor) {
         this.sidedToBetterFactor = sidedToBetterFactor;
     }
 
@@ -25,7 +25,7 @@ public class SidedAverageBreeder implements Breeder<Instance> {
         }
 
         for (int i = 0; i < father.getChromosomes().length; i++)
-            chromosome[i] = ((1 + sidedToBetterFactor) * better[i] + (1 - sidedToBetterFactor) * worse[i]) / 2;
+            chromosome[i] = Math.random() < sidedToBetterFactor ? better[i] : worse[i];
 
         return new Instance(chromosome);
     }

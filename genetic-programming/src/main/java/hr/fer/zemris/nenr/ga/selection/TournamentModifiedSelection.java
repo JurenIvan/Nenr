@@ -9,6 +9,9 @@ import java.util.List;
 
 import static java.util.Comparator.comparing;
 
+/**
+ * Replaces worst ones with children of fist 2/3 only if child is better than one of parents
+ */
 public class TournamentModifiedSelection implements Selection<Instance> {
 
     private final Breeder<Instance> breeder;

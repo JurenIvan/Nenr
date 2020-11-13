@@ -9,6 +9,7 @@ import hr.fer.zemris.nenr.ga.selection.Selection;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.min;
 import static java.util.Comparator.comparing;
 
 public class GeneticAlgorithm<T extends GASolution<?>> {
@@ -36,7 +37,6 @@ public class GeneticAlgorithm<T extends GASolution<?>> {
         evaluatePopulation();
         for (int i = 0; i < maxIterationCount; i++) {
             doSelection();
-//            doMutation();
             evaluatePopulation();
             conditionallySave(i + 1);
         }
@@ -71,8 +71,7 @@ public class GeneticAlgorithm<T extends GASolution<?>> {
     }
 
     public T getFittest() {
-        population.sort(comparing(T::getFitness));
-        return population.get(0);
+        return min(population, comparing(e -> e.getFitness()));
     }
 
     public double populationFitness() {

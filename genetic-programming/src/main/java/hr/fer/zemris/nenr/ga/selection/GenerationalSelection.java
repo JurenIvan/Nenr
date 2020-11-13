@@ -7,11 +7,13 @@ import java.util.List;
 
 import static java.util.Comparator.comparing;
 
+/**
+ * Leaves eliminationFactor percentage(n) of Instances and rest replaces with best (n)
+ */
 public class GenerationalSelection implements Selection<Instance> {
 
     private final double eliminationFactor;
     private final Mutator<Instance> mutator;
-
 
     public GenerationalSelection(Mutator<Instance> mutator, double eliminationFactor) {
         this.eliminationFactor = eliminationFactor;
