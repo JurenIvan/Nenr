@@ -32,7 +32,7 @@ public class GreekAlphabetDrawer extends JFrame {
         Reducer<PairDouble> reducer = new PixelReducer(M);
         NeuralNetwork neuralNetwork = new NeuralNetwork();
 
-        learnerScreen = new LearnerScreen(reducer, model);
+        learnerScreen = new LearnerScreen(model);
         parametersScreen = new ParametersScreen(neuralNetwork);
         guessingScreen = new GuessingScreen(reducer);
 

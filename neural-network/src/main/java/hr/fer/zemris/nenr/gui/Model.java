@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.lang.Double.*;
+import static java.lang.Double.parseDouble;
 
 public class Model {
 
@@ -22,12 +22,15 @@ public class Model {
 
     public void setKey(Character key) {
         this.currentKeyState = key;
-        this.data.put(key, new ArrayList<>());
-        System.err.println("Key set to :" + key);
+        this.data.computeIfAbsent(key, k -> new ArrayList<>());
     }
 
     public List<List<PairDouble>> getData(Character key) {
         return data.getOrDefault(key, List.of());
+    }
+
+    public Map<Character, List<List<PairDouble>>> getData() {
+        return data;
     }
 
     public void addData(List<PairDouble> sample) {
@@ -53,18 +56,14 @@ public class Model {
 
     public List<String> exportDocument() {
         List<String> result = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
+
         for (var entry : data.entrySet()) {
             for (List<PairDouble> values : entry.getValue()) {
-                sb.append(values.stream()
+                String sb = values.stream()
                         .map(e -> e.getX() + "," + e.getY())
-                        .collect(Collectors.joining(",")))
-                        .append(",")
-                        .append(entry.getKey())
-                        .append("\n");
-                result.add(sb.toString());
+                        .collect(Collectors.joining(",")) + "," + entry.getKey();
+                result.add(sb);
             }
-            sb.setLength(0);
         }
 
         return result;
