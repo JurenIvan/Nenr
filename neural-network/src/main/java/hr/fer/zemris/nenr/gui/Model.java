@@ -45,13 +45,9 @@ public class Model {
             for (int i = 0; i < splitted.length - 1; i += 2) {
                 lineParsed.add(new PairDouble(parseDouble(splitted[i]), parseDouble(splitted[i + 1])));
             }
-            setKey(determineCharacter(line));
+            setKey(line.charAt(line.length() - 1));
             addData(lineParsed);
         }
-    }
-
-    private Character determineCharacter(String splitted) {
-        return splitted.charAt(splitted.length() - 1);
     }
 
     public List<String> exportDocument() {
@@ -59,13 +55,11 @@ public class Model {
 
         for (var entry : data.entrySet()) {
             for (List<PairDouble> values : entry.getValue()) {
-                String sb = values.stream()
+                result.add(values.stream()
                         .map(e -> e.getX() + "," + e.getY())
-                        .collect(Collectors.joining(",")) + "," + entry.getKey();
-                result.add(sb);
+                        .collect(Collectors.joining(",")) + "," + entry.getKey());
             }
         }
-
         return result;
     }
 }
