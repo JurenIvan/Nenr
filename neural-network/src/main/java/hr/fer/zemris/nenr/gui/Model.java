@@ -1,0 +1,72 @@
+package hr.fer.zemris.nenr.gui;
+
+import hr.fer.zemris.nenr.PairDouble;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static java.lang.Double.*;
+
+public class Model {
+
+    private final Map<Character, List<List<PairDouble>>> data;
+    private Character currentKeyState;
+
+    public Model(char defaultChar) {
+        this.data = new HashMap<>();
+        setKey(defaultChar);
+    }
+
+    public void setKey(Character key) {
+        this.currentKeyState = key;
+        this.data.put(key, new ArrayList<>());
+        System.err.println("Key set to :" + key);
+    }
+
+    public List<List<PairDouble>> getData(Character key) {
+        return data.getOrDefault(key, List.of());
+    }
+
+    public void addData(List<PairDouble> sample) {
+        data.get(currentKeyState).add(sample);
+    }
+
+    public void loadDocument(List<String> lines) {
+        data.clear();
+        for (var line : lines) {
+            var splitted = line.split(",");
+            List<PairDouble> lineParsed = new ArrayList<>();
+            for (int i = 0; i < splitted.length - 1; i += 2) {
+                lineParsed.add(new PairDouble(parseDouble(splitted[i]), parseDouble(splitted[i + 1])));
+            }
+            setKey(determineCharacter(line));
+            addData(lineParsed);
+        }
+    }
+
+    private Character determineCharacter(String splitted) {
+        return splitted.charAt(splitted.length() - 1);
+    }
+
+    public List<String> exportDocument() {
+        List<String> result = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (var entry : data.entrySet()) {
+            for (List<PairDouble> values : entry.getValue()) {
+                sb.append(values.stream()
+                        .map(e -> e.getX() + "," + e.getY())
+                        .collect(Collectors.joining(",")))
+                        .append(",")
+                        .append(entry.getKey())
+                        .append("\n");
+                result.add(sb.toString());
+            }
+            sb.setLength(0);
+        }
+
+        return result;
+    }
+}
