@@ -19,7 +19,7 @@ public class StatusOutputter implements Outputter {
 
     @Override
     public void output(int iteration, double err) {
-        if (iteration % 1000 == 0)
+        if (iteration % 100 == 0)
             data.add("iter: " + iteration + " err:" + err);
         notifyScreen();
     }

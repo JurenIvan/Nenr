@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.lang.Double.parseDouble;
+import static java.util.stream.Collectors.toList;
 
 public class Model {
 
@@ -76,12 +77,18 @@ public class Model {
         List<Sample> samples = new ArrayList<>();
         int counter = 0;
         final int countOfChars = data.size();
-        for (var keyValue : data.entrySet()) {
+        var sortedEntrySet = data.entrySet().stream().sorted((a, b) -> Character.compare(a.getKey(), b.getKey())).collect(toList());
+        for (var keyValue : sortedEntrySet) {
             for (var sample : keyValue.getValue()) {
                 samples.add(new Sample(reducer.reduce(sample), output(counter, countOfChars)));
             }
+            counter++;
         }
         return samples;
+    }
+
+    public List<String> getKeys() {
+        return data.keySet().stream().map(String::valueOf).sorted().collect(toList());
     }
 
     public double[] output(int index, int len) {

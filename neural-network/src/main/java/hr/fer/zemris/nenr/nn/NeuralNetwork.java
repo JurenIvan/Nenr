@@ -98,7 +98,6 @@ public class NeuralNetwork {
                 prev = y.get(layerIndex).get(s);
             }
         }
-        return;
     }
 
     private void calculateDs(List<Sample> samples) {

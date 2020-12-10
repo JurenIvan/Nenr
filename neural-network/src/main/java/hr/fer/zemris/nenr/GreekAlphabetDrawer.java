@@ -19,26 +19,19 @@ public class GreekAlphabetDrawer extends JFrame {
     private static final int DEFAULT_WIDTH = 1500;
     private static final int M = 20;
 
-    private final Model model = new Model('a', new PixelReducer(M));
+    private final Reducer<PairDouble> reducer = new PixelReducer(M);
+    private final Model model = new Model('a', reducer);
 
     private final GuessingScreen guessingScreen;
     private final LearnerScreen learnerScreen;
     private final ParametersScreen parametersScreen;
-
-    private final Action openDocument;
-    private final Action saveAsDocument;
-    private final Action clearDocument;
 
     public GreekAlphabetDrawer() {
         Reducer<PairDouble> reducer = new PixelReducer(M);
 
         learnerScreen = new LearnerScreen(model);
         parametersScreen = new ParametersScreen(model);
-        guessingScreen = new GuessingScreen(reducer);
-
-        openDocument = new OpenDocument("Open document", this, model);
-        saveAsDocument = new SaveAsDocument("Save as document", this, model);
-        clearDocument = new ClearDocument("Clear document", model);
+        guessingScreen = new GuessingScreen(parametersScreen, model, reducer);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
@@ -72,9 +65,10 @@ public class GreekAlphabetDrawer extends JFrame {
         setJMenuBar(mb);
         JMenu file = new JMenu("file");
         mb.add(file);
-        file.add(new JMenuItem(openDocument));
-        file.add(new JMenuItem(saveAsDocument));
-        file.add(new JMenuItem(clearDocument));
+
+        file.add(new JMenuItem(new OpenDocument("Open document", this, model)));
+        file.add(new JMenuItem(new SaveAsDocument("Save as document", this, model)));
+        file.add(new JMenuItem(new ClearDocument("Clear document", model)));
     }
 
     private void printHowToUse() {
