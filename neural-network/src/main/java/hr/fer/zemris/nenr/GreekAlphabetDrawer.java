@@ -1,14 +1,14 @@
 package hr.fer.zemris.nenr;
 
-import hr.fer.zemris.nenr.gui.GuessingScreen;
-import hr.fer.zemris.nenr.gui.LearnerScreen;
 import hr.fer.zemris.nenr.gui.Model;
-import hr.fer.zemris.nenr.gui.ParametersScreen;
+import hr.fer.zemris.nenr.gui.actions.ClearDocument;
 import hr.fer.zemris.nenr.gui.actions.OpenDocument;
 import hr.fer.zemris.nenr.gui.actions.SaveAsDocument;
-import hr.fer.zemris.nenr.nn.NeuralNetwork;
 import hr.fer.zemris.nenr.gui.reducer.PixelReducer;
 import hr.fer.zemris.nenr.gui.reducer.Reducer;
+import hr.fer.zemris.nenr.gui.screens.GuessingScreen;
+import hr.fer.zemris.nenr.gui.screens.LearnerScreen;
+import hr.fer.zemris.nenr.gui.screens.ParametersScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +17,9 @@ public class GreekAlphabetDrawer extends JFrame {
 
     private static final int DEFAULT_HEIGHT = 800;
     private static final int DEFAULT_WIDTH = 1500;
-    private static int M = 20;
+    private static final int M = 20;
 
-    private final Model model = new Model('a');
+    private final Model model = new Model('a', new PixelReducer(M));
 
     private final GuessingScreen guessingScreen;
     private final LearnerScreen learnerScreen;
@@ -27,17 +27,18 @@ public class GreekAlphabetDrawer extends JFrame {
 
     private final Action openDocument;
     private final Action saveAsDocument;
+    private final Action clearDocument;
 
     public GreekAlphabetDrawer() {
         Reducer<PairDouble> reducer = new PixelReducer(M);
-        NeuralNetwork neuralNetwork = null;
 
         learnerScreen = new LearnerScreen(model);
-        parametersScreen = new ParametersScreen(neuralNetwork);
+        parametersScreen = new ParametersScreen(model);
         guessingScreen = new GuessingScreen(reducer);
 
         openDocument = new OpenDocument("Open document", this, model);
         saveAsDocument = new SaveAsDocument("Save as document", this, model);
+        clearDocument = new ClearDocument("Clear document", model);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
@@ -73,6 +74,7 @@ public class GreekAlphabetDrawer extends JFrame {
         mb.add(file);
         file.add(new JMenuItem(openDocument));
         file.add(new JMenuItem(saveAsDocument));
+        file.add(new JMenuItem(clearDocument));
     }
 
     private void printHowToUse() {

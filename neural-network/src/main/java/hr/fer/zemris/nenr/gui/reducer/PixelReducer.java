@@ -2,7 +2,6 @@ package hr.fer.zemris.nenr.gui.reducer;
 
 import hr.fer.zemris.nenr.PairDouble;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.*;
@@ -16,8 +15,8 @@ public class PixelReducer implements Reducer<PairDouble> {
     }
 
     @Override
-    public List<PairDouble> reduce(List<PairDouble> points) {
-        List<PairDouble> reduced = new ArrayList<>(representativePointsCount);
+    public double[] reduce(List<PairDouble> points) {
+        double[] reduced = new double[representativePointsCount * 2];
         int numberOfPoints = points.size();
 
         //calculate averages
@@ -64,12 +63,13 @@ public class PixelReducer implements Reducer<PairDouble> {
             var targetDistance = k * d / (representativePointsCount - 1);
 
             previous = points.get(counter);
-            while (distance < targetDistance) {
+            while (distance < targetDistance && counter + 1 < points.size()) {
                 PairDouble current = points.get(++counter);
                 distance += distance(previous, current);
                 previous = current;
             }
-            reduced.add(previous);
+            reduced[2 * k] = previous.getX();
+            reduced[2 * k + 1] = previous.getY();
         }
 
         return reduced;

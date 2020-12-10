@@ -1,6 +1,7 @@
-package hr.fer.zemris.nenr.gui;
+package hr.fer.zemris.nenr.gui.screens;
 
 import hr.fer.zemris.nenr.PairDouble;
+import hr.fer.zemris.nenr.gui.Model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,6 +54,7 @@ public class LearnerScreen extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if (specialState) specialState = false;
                 points.clear();
             }
 
@@ -68,9 +70,9 @@ public class LearnerScreen extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == 'x') {
+                    repaint();
                     showMessageDialog(LearnerScreen.this, getMessage(), "Entered Special state for viewing inserted file. Press x to exit", INFORMATION_MESSAGE);
                     specialState = !specialState;
-                    repaint();
                 } else {
                     System.err.println("Key set to :" + e.getKeyChar());
                     model.setKey(e.getKeyChar());

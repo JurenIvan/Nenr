@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Reducer<T> {
 
-    List<T> reduce(List<T> points);
+    double[] reduce(List<T> points);
 }

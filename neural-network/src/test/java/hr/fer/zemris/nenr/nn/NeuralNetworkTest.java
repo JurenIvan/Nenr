@@ -9,7 +9,7 @@ public class NeuralNetworkTest  {
 
     @Test
     public void testFit_online() {
-        var nn = new NeuralNetwork(0.5, 0.001, 100000, 1, 6, 1);
+        var nn = new NeuralNetwork(0.5, 0.001, 100000, null, 1, 6, 1);
 
         List<Sample> samples = List.of(
                 new Sample(new double[]{-1.0}, new double[]{1.00}),
@@ -27,13 +27,14 @@ public class NeuralNetworkTest  {
         nn.fit(samples, NeuralNetwork.TrainMode.ONLINE);
         for (double i = -1; i < 1; i=i+0.2) {
             var result1 = nn.predict(new Sample(new double[]{i}, null));
-            Assertions.assertEquals(i*i,result1[0],0.2);
+            System.out.println(result1[0]);
+            Assertions.assertEquals(i * i, result1[0], 0.2);
         }
     }
 
     @Test
     public void testFit_batch() {
-        var nn = new NeuralNetwork(0.5, 0.001, 10000, 1, 6, 1);
+        var nn = new NeuralNetwork(0.5, 0.001, 10000, null, 1, 6, 1);
 
         List<Sample> samples = List.of(
                 new Sample(new double[]{-1.0}, new double[]{1.00}),
@@ -57,7 +58,7 @@ public class NeuralNetworkTest  {
 
     @Test
     public void testFit() {
-        var nn = new NeuralNetwork(0.5, 0.001, 10000, 1, 6, 1);
+        var nn = new NeuralNetwork(0.5, 0.001, 10000, null, 1, 6, 1);
 
         List<Sample> samples = List.of(
                 new Sample(new double[]{-1.0}, new double[]{1.00}),

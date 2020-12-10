@@ -1,6 +1,8 @@
 package hr.fer.zemris.nenr.gui;
 
 import hr.fer.zemris.nenr.PairDouble;
+import hr.fer.zemris.nenr.gui.reducer.Reducer;
+import hr.fer.zemris.nenr.nn.Sample;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,10 +15,12 @@ import static java.lang.Double.parseDouble;
 public class Model {
 
     private final Map<Character, List<List<PairDouble>>> data;
+    private final Reducer<PairDouble> reducer;
     private Character currentKeyState;
 
-    public Model(char defaultChar) {
+    public Model(char defaultChar, Reducer<PairDouble> reducer) {
         this.data = new HashMap<>();
+        this.reducer = reducer;
         setKey(defaultChar);
     }
 
@@ -60,6 +64,29 @@ public class Model {
                         .collect(Collectors.joining(",")) + "," + entry.getKey());
             }
         }
+        return result;
+    }
+
+    public void clear() {
+        this.data.clear();
+        setKey(currentKeyState);
+    }
+
+    public List<Sample> getSamples() {
+        List<Sample> samples = new ArrayList<>();
+        int counter = 0;
+        final int countOfChars = data.size();
+        for (var keyValue : data.entrySet()) {
+            for (var sample : keyValue.getValue()) {
+                samples.add(new Sample(reducer.reduce(sample), output(counter, countOfChars)));
+            }
+        }
+        return samples;
+    }
+
+    public double[] output(int index, int len) {
+        double[] result = new double[len];
+        result[index] = 1;
         return result;
     }
 }

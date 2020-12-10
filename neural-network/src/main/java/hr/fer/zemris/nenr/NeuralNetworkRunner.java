@@ -9,7 +9,7 @@ public class NeuralNetworkRunner {
 
     public static void main(String[] args) {
         int[] layers = new int[]{2, 3, 2};
-        var nn = new NeuralNetwork(1, 0.001, 100000, layers);
+        var nn = new NeuralNetwork(1, 0.001, 100000, null, layers);
 
         List<Sample> samples = List.of(
                 new Sample(new double[]{1, 0.1}, new double[]{1,0})

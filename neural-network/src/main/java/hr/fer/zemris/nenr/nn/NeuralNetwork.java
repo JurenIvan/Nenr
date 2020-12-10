@@ -1,5 +1,7 @@
 package hr.fer.zemris.nenr.nn;
 
+import hr.fer.zemris.nenr.nn.outputter.Outputter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,16 +17,19 @@ public class NeuralNetwork {
     private final List<double[]> w0;
     private final List<List<double[]>> y;
     private final List<List<double[]>> d;
+    private final Outputter statusOutput;
     private final double learningRate;
     private final double eps;
     private final int iterationCap;
 
 
-    public NeuralNetwork(double learningRate, double eps, int iterationCap, int... layers) {
+    public NeuralNetwork(double learningRate, double eps, int iterationCap, Outputter statusOutput, int... layers) {
         this.learningRate = learningRate;
         this.iterationCap = iterationCap;
         this.eps = eps;
         this.layers = layers;
+        this.statusOutput = statusOutput == null ? (iteration, err) -> {
+        } : statusOutput;
 
         int layersCount = layers.length - 1;
         this.w = new ArrayList<>(layersCount);
@@ -39,8 +44,9 @@ public class NeuralNetwork {
 
     public void fit(List<Sample> samples, TrainMode mode) {
         double err = error(samples);
+        int iMax = 0;
         for (int i = 0; i < iterationCap && err > eps; i++) {
-            if (i % 1000 == 0) System.out.println("iter: " + i + " err:" + err);
+            if (i % 1000 == 0) statusOutput.output(i, err);
 
             if (mode == ONLINE) {
                 train(List.of(samples.get((int) (Math.random() * samples.size()))));
@@ -50,7 +56,9 @@ public class NeuralNetwork {
                 train(samples);
             }
             err = error(samples);
+            i = iMax;
         }
+        statusOutput.output(iMax, err);
     }
 
     private List<Sample> selectSubset(List<Sample> samples, int count) {
@@ -158,7 +166,7 @@ public class NeuralNetwork {
         double errSum = 0;
         for (var sample : samples) {
             var prediction = predict(sample);
-            for (int i = 0; i < prediction.length; i++) {
+            for (int i = 0; i < layers[layers.length - 1]; i++) {
                 errSum += pow(prediction[i] - sample.getExpected()[i], 2);
             }
         }
