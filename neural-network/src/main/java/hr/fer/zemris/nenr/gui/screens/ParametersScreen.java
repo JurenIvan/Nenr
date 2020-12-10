@@ -60,8 +60,7 @@ public class ParametersScreen extends JPanel {
                         Integer.parseInt(iterationLimit.getText()),
                         new StatusOutputter(ParametersScreen.this),
                         parseStructure(networkStructure.getText()));
-
-                neuralNetwork.fit(model.getSamples(), NeuralNetwork.TrainMode.valueOf((String) trainMode.getSelectedItem()));
+                new Thread(() -> neuralNetwork.fit(model.getSamples(), NeuralNetwork.TrainMode.valueOf((String) trainMode.getSelectedItem()))).start();
             }
         });
 
