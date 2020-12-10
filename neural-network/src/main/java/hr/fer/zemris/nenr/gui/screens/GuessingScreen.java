@@ -15,7 +15,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GuessingScreen extends JPanel {
 
@@ -63,7 +62,7 @@ public class GuessingScreen extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 points.add(new PairDouble(e.getX(), e.getY()));
-                double[] reduced = reducer.reduce(points.stream().map(h -> new PairDouble(h.getX(), h.getY())).collect(Collectors.toList()));
+                double[] reduced = reducer.reduce(points);
 
                 reduced = parametersScreen.getNeuralNetwork().predict(new Sample(reduced, null));
                 List<Double> result = new ArrayList<>();

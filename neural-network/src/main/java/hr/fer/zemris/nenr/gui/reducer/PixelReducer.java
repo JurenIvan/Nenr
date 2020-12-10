@@ -3,12 +3,13 @@ package hr.fer.zemris.nenr.gui.reducer;
 import hr.fer.zemris.nenr.PairDouble;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.Math.*;
 
 public class PixelReducer implements Reducer<PairDouble> {
 
-    private final int representativePointsCount;
+    private int representativePointsCount;
 
     public PixelReducer(int representativePointsCount) {
         this.representativePointsCount = representativePointsCount;
@@ -16,6 +17,8 @@ public class PixelReducer implements Reducer<PairDouble> {
 
     @Override
     public double[] reduce(List<PairDouble> points) {
+        points = points.stream().map(h -> new PairDouble(h.getX(), h.getY())).collect(Collectors.toList());
+
         double[] reduced = new double[representativePointsCount * 2];
         int numberOfPoints = points.size();
 
@@ -73,6 +76,11 @@ public class PixelReducer implements Reducer<PairDouble> {
         }
 
         return reduced;
+    }
+
+    @Override
+    public void setSampleCount(int sampleCount) {
+        this.representativePointsCount = sampleCount;
     }
 
     private double distance(PairDouble previous, PairDouble current) {

@@ -27,10 +27,8 @@ public class GreekAlphabetDrawer extends JFrame {
     private final ParametersScreen parametersScreen;
 
     public GreekAlphabetDrawer() {
-        Reducer<PairDouble> reducer = new PixelReducer(M);
-
         learnerScreen = new LearnerScreen(model);
-        parametersScreen = new ParametersScreen(model);
+        parametersScreen = new ParametersScreen(model, reducer);
         guessingScreen = new GuessingScreen(parametersScreen, model, reducer);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,7 +43,6 @@ public class GreekAlphabetDrawer extends JFrame {
     }
 
     private void initGUI() {
-        printHowToUse();
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
         initializeScreens();
@@ -69,14 +66,5 @@ public class GreekAlphabetDrawer extends JFrame {
         file.add(new JMenuItem(new OpenDocument("Open document", this, model)));
         file.add(new JMenuItem(new SaveAsDocument("Save as document", this, model)));
         file.add(new JMenuItem(new ClearDocument("Clear document", model)));
-    }
-
-    private void printHowToUse() {
-        System.err.println("sign    letter    class");
-        System.err.println("alpha  => a =>  1,0,0,0,0");
-        System.err.println("beta   => b =>  0,1,0,0,0");
-        System.err.println("gamma  => c =>  0,0,1,0,0");
-        System.err.println("delta  => d =>  0,0,0,1,0");
-        System.err.println("eta    => e =>  0,0,0,0,1");
     }
 }

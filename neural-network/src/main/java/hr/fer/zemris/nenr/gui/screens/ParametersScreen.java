@@ -1,6 +1,8 @@
 package hr.fer.zemris.nenr.gui.screens;
 
+import hr.fer.zemris.nenr.PairDouble;
 import hr.fer.zemris.nenr.gui.Model;
+import hr.fer.zemris.nenr.gui.reducer.Reducer;
 import hr.fer.zemris.nenr.nn.NeuralNetwork;
 import hr.fer.zemris.nenr.nn.outputter.StatusOutputter;
 
@@ -20,10 +22,12 @@ public class ParametersScreen extends JPanel {
     private final JTextArea samplingNumber;
     private final JButton trainButton;
     private final Model model;
+    private final Reducer<PairDouble> reducer;
     private NeuralNetwork neuralNetwork;
 
-    public ParametersScreen(Model model) {
+    public ParametersScreen(Model model, Reducer<PairDouble> reducer) {
         this.model = model;
+        this.reducer = reducer;
 
         setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
 
@@ -47,6 +51,9 @@ public class ParametersScreen extends JPanel {
         trainButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                reducer.setSampleCount(Integer.parseInt(samplingNumber.getText()));
+                trainingStatus.setText("Training:");
+
                 neuralNetwork = new NeuralNetwork(
                         Double.parseDouble(learninRate.getText()),
                         Double.parseDouble(eps.getText()),

@@ -5,4 +5,6 @@ import java.util.List;
 public interface Reducer<T> {
 
     double[] reduce(List<T> points);
+
+    void setSampleCount(int sampleCount);
 }
