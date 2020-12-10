@@ -1,4 +1,4 @@
-package hr.fer.zemris.nenr.reducer;
+package hr.fer.zemris.nenr.gui.reducer;
 
 import java.util.List;
 

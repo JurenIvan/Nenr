@@ -41,7 +41,7 @@ public class NeuralNetwork {
         double err = error(samples);
         for (int i = 0; i < iterationCap && err > eps; i++) {
             if (i % 1000 == 0) System.out.println("iter: " + i + " err:" + err);
-            
+
             if (mode == ONLINE) {
                 train(List.of(samples.get((int) (Math.random() * samples.size()))));
             } else if (mode == MINI_BATCH) {
@@ -175,14 +175,12 @@ public class NeuralNetwork {
     }
 
     private void initializeW() {
-        double counter = 0.1;
         for (int i = 0; i < w.size(); i++) {
             var matrix = w.get(i);
             for (int j = 0; j < matrix.length; j++) {
                 var row = matrix[j];
                 for (int k = 0; k < row.length; k++) {
-                    matrix[j][k] = counter;
-                    counter += 0.1;
+                    matrix[j][k] = Math.random() * 0.8 - 0.4;
                 }
             }
         }
@@ -192,7 +190,7 @@ public class NeuralNetwork {
         for (int j = 0; j < w0.size(); j++) {
             var row = w0.get(j);
             for (int k = 0; k < row.length; k++) {
-                row[k] = 0.2;
+                row[k] = Math.random() * 0.6 - 0.3;
             }
         }
     }

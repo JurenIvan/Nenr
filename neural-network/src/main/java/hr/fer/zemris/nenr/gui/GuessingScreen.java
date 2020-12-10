@@ -1,7 +1,7 @@
 package hr.fer.zemris.nenr.gui;
 
 import hr.fer.zemris.nenr.PairDouble;
-import hr.fer.zemris.nenr.reducer.Reducer;
+import hr.fer.zemris.nenr.gui.reducer.Reducer;
 
 import javax.swing.*;
 

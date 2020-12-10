@@ -7,8 +7,8 @@ import hr.fer.zemris.nenr.gui.ParametersScreen;
 import hr.fer.zemris.nenr.gui.actions.OpenDocument;
 import hr.fer.zemris.nenr.gui.actions.SaveAsDocument;
 import hr.fer.zemris.nenr.nn.NeuralNetwork;
-import hr.fer.zemris.nenr.reducer.PixelReducer;
-import hr.fer.zemris.nenr.reducer.Reducer;
+import hr.fer.zemris.nenr.gui.reducer.PixelReducer;
+import hr.fer.zemris.nenr.gui.reducer.Reducer;
 
 import javax.swing.*;
 import java.awt.*;
