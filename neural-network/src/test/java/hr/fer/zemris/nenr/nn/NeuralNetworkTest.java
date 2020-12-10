@@ -9,7 +9,7 @@ public class NeuralNetworkTest  {
 
     @Test
     public void testFit_online() {
-        var nn = new NeuralNetwork(0.5, 0.001, 10000, 1, 6, 1);
+        var nn = new NeuralNetwork(0.5, 0.001, 100000, 1, 6, 1);
 
         List<Sample> samples = List.of(
                 new Sample(new double[]{-1.0}, new double[]{1.00}),
