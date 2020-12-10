@@ -87,7 +87,7 @@ public class ParametersScreen extends JPanel {
         centerPanel.add(new JLabel("Sampling number for picture (eg. \"20\""), counter++);
         centerPanel.add(samplingNumber, counter++);
 
-        centerPanel.add(trainingStatus, counter++);
+        centerPanel.add(new JScrollPane(trainingStatus), counter++);
         centerPanel.add(new JPanel(), counter);
         trainingStatus.setEnabled(false);
 

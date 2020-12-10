@@ -9,8 +9,10 @@ public class StatusOutputter implements Outputter {
 
     private final Runnable runnable;
     private final List<String> data = new ArrayList<>();
+    private final ParametersScreen parametersScreen;
 
     public StatusOutputter(ParametersScreen parametersScreen) {
+        this.parametersScreen = parametersScreen;
         runnable = () -> {
             parametersScreen.pushTrainingData(data);
             data.clear();
@@ -18,10 +20,11 @@ public class StatusOutputter implements Outputter {
     }
 
     @Override
-    public void output(int iteration, double err) {
-        if (iteration % 100 == 0)
-            data.add("iter: " + iteration + " err:" + err);
-        notifyScreen();
+    public void output(String message) {
+        data.add(message);
+        parametersScreen.pushTrainingData(data);
+        data.clear();
+//        notifyScreen();
     }
 
     private void notifyScreen() {

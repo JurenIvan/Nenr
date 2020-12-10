@@ -28,7 +28,7 @@ public class NeuralNetwork {
         this.iterationCap = iterationCap;
         this.eps = eps;
         this.layers = layers;
-        this.statusOutput = statusOutput == null ? (iteration, err) -> {
+        this.statusOutput = statusOutput == null ? (e) -> {
         } : statusOutput;
 
         int layersCount = layers.length - 1;
@@ -44,21 +44,23 @@ public class NeuralNetwork {
 
     public void fit(List<Sample> samples, TrainMode mode) {
         double err = error(samples);
-        int iMax = 0;
-        for (int i = 0; i < iterationCap && err > eps; i++) {
-            if (i % 1000 == 0) statusOutput.output(i, err);
+        int i = 0;
+        for (; i < iterationCap && err > eps; i++) {
+            statusOutput.output("iter: " + i + " err:" + err);
 
             if (mode == ONLINE) {
-                train(List.of(samples.get((int) (Math.random() * samples.size()))));
+                for (int j = 0; j < samples.size(); j++) {
+                    train(List.of(samples.get((int) (Math.random() * samples.size()))));
+                }
             } else if (mode == MINI_BATCH) {
-                train(selectSubset(samples, 2));
+                train(selectSubset(samples, 10));
             } else {
                 train(samples);
             }
             err = error(samples);
-            i = iMax;
         }
-        statusOutput.output(iMax, err);
+        statusOutput.output("iter: " + i + " err:" + err);
+        statusOutput.output("DONE!");
     }
 
     private List<Sample> selectSubset(List<Sample> samples, int count) {

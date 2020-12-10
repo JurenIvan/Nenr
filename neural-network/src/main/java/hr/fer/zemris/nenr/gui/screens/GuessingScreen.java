@@ -79,6 +79,12 @@ public class GuessingScreen extends JPanel {
         canvas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
+                var reduced = parametersScreen.getNeuralNetwork().predict(new Sample(reducer.reduce(points), null));
+                List<Double> result = new ArrayList<>();
+                for (double v : reduced) {
+                    result.add(v);
+                }
+                System.out.println(result);
                 points.clear();
             }
         });
