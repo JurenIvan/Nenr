@@ -3,4 +3,5 @@ rootProject.name = 'nenr'
 include 'fuzzy-logic'
 include 'genetic-programming'
 include 'neural-network'
+include 'neuro-fuzzy'
 
