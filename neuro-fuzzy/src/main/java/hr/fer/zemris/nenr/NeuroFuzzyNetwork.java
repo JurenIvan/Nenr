@@ -137,6 +137,24 @@ public class NeuroFuzzyNetwork {
         }
     }
 
+    public double predict(double[] numbers) {
+        double x = numbers[0];
+        double y = numbers[1];
+
+        double wSum = 0;
+        double output = 0.0;
+
+        for (int i = 0; i < ruleCount; i++) {
+            double alpha = 1.0 / (1.0 + exp(b[i] * (x - a[i])));
+            double beta = 1.0 / (1.0 + exp(d[i] * (y - c[i])));
+            double w = alpha * beta;
+            wSum += w;
+            output += (p[i] * x + q[i] * y + r[i]) * w;
+        }
+        output /= wSum;
+        return output;
+    }
+
 
     public void update(int i) {
         a[i] += etaA * dA[i];

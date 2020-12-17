@@ -13,8 +13,10 @@ public class Runner {
     private static final List<double[]> SAMPLES = getSamples(-4, 4, -4, 4);
 
     public static void main(String[] args) {
-        NeuroFuzzyNetwork anfis = new NeuroFuzzyNetwork(2, 81, 0.001, 0.001);
+        NeuroFuzzyNetwork anfis = new NeuroFuzzyNetwork(30, 81, 0.001, 0.001);
         anfis.train(SAMPLES, 100000);
+
+        System.out.println(anfis.predict(new double[]{-4, -4}));
     }
 
     public static List<double[]> getSamples(int xMin, int xMax, int yMin, int yMax) {
