@@ -3,7 +3,6 @@ package hr.fer.zemris.nenr.demo;
 import hr.fer.zemris.nenr.NeuroFuzzyNetwork;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 
@@ -26,7 +25,7 @@ public class Task6 {
     public static List<double[]> getError(NeuroFuzzyNetwork anfis, List<double[]> samples) {
         List<double[]> result = new ArrayList<>(81);
         for (var sample : samples) {
-            var prediction = anfis.predict(Arrays.copyOf(sample, 2));
+            var prediction = anfis.predict(sample);
             var arr = new double[3];
             arr[0] = sample[0];
             arr[1] = sample[1];
