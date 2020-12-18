@@ -1,0 +1,11 @@
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:2 with line title 'R1-A', 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:3 with line title 'R1-B'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:4 with line title 'R2-A', 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:5 with line title 'R2-B'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:6 with line title 'R3-A', 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:7 with line title 'R3-B'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:8 with line title 'R4-A', 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:9 with line title 'R4-B'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:10 with line title 'R5-A', 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:11 with line title 'R5-B'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:12 with line title 'R6-A', 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task5/task-5.txt' using 1:13 with line title 'R6-B'

@@ -1,0 +1,11 @@
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task8/task-8-B_5.txt' with line title 'BATCH eta=0.5'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task8/task-8-B_001.txt' with line title 'BATCH eta=0.001'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task8/task-8-B_00001.txt' with line title 'BATCH eta=0.00001'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task8/task-8-O_5.txt' with line title 'ONLINE eta=0.5'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task8/task-8-O_001.txt' with line title 'ONLINE eta=0.001'
+
+plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task8/task-8-O_00001.txt' with line title 'ONLINE eta=0.00001'
