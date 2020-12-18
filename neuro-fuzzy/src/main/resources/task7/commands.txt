@@ -1,3 +1,4 @@
+set xrange[0:100]
 plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task7/task-7-batch.txt' with line title 'BATCH'
 
 plot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task7/task-7-online_first100.svg' with line title 'BATCH'

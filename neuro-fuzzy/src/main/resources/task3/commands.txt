@@ -1,0 +1,6 @@
+set xrange [-4:4]
+set yrange [-4:4]
+set hidden3d
+set dgrid3d 50,50 qnorm 2
+
+splot 'IdeaProjects/nenr/neuro-fuzzy/src/main/resources/task3/task1-data.txt' with lines title 'given function'
