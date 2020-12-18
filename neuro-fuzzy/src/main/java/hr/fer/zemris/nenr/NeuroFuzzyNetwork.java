@@ -59,6 +59,11 @@ public class NeuroFuzzyNetwork {
     }
 
     public void train(List<double[]> samples, int iterationCount) {
+        train(samples, iterationCount, 100_000);
+    }
+
+
+    public void train(List<double[]> samples, int iterationCount, int eachNIterationPrint) {
         for (int iteration = 0; iteration <= iterationCount; iteration++) {
 
             initializeBatchElems();
@@ -111,7 +116,7 @@ public class NeuroFuzzyNetwork {
                 update(i);
             }
 
-            if (iteration % 5000 == 0) {
+            if (iteration % eachNIterationPrint == 0) {
                 double err = 0;
 
                 for (double[] sample : samples) {
@@ -132,7 +137,7 @@ public class NeuroFuzzyNetwork {
                     output /= wSum;
                     err += pow(expectedOut - output, 2);
                 }
-                System.out.printf("iteration:%8d %s%n", iteration, 0.5 * err / samples.size());
+                System.out.printf("%d %s%n", iteration, 0.5 * err / samples.size());
             }
         }
     }
@@ -180,4 +185,19 @@ public class NeuroFuzzyNetwork {
         return a;
     }
 
+    public double[] getA() {
+        return a;
+    }
+
+    public double[] getB() {
+        return b;
+    }
+
+    public double[] getC() {
+        return c;
+    }
+
+    public double[] getD() {
+        return d;
+    }
 }
