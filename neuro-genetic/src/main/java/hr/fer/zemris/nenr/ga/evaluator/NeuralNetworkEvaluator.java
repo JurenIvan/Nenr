@@ -11,7 +11,7 @@ import static java.lang.System.arraycopy;
 
 public class NeuralNetworkEvaluator implements Evaluator<InstanceDouble> {
 
-    private static final CountingFunction<double[], Double> function = new CountingFunction<>(e -> -1.0);
+    private final CountingFunction<double[], Double> function = new CountingFunction<>(e -> -1.0);
 
     private final BiFunction<Double, Double, Double> errorCollectingFunction;
     private final Dataset dataset;

@@ -29,7 +29,8 @@ public class InstanceDouble implements GASolution<double[]> {
     @Override
     public String toString() {
         return "Instance{" +
+                "fitness=" + fitness + " ," +
                 "cromosomes=" + stream(chromosomes).mapToObj(e -> format("%5.5f", e)).collect(joining(",")) +
-                ", fitness=" + fitness + '}';
+                '}';
     }
 }
