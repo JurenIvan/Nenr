@@ -5,11 +5,8 @@ import hr.fer.zemris.nenr.ga.evaluator.FunctionEvaluator;
 import hr.fer.zemris.nenr.ga.evaluator.IFunction;
 import hr.fer.zemris.nenr.ga.initializer.PopulationInitializer;
 import hr.fer.zemris.nenr.ga.mutator.NormalNoiseMutator;
-import hr.fer.zemris.nenr.ga.picker.RandomPicker;
 import hr.fer.zemris.nenr.ga.picker.RouletteWheel;
 import hr.fer.zemris.nenr.ga.selection.GenerationalBreederSelection;
-import hr.fer.zemris.nenr.ga.selection.GenerationalCanonicalSelection;
-import hr.fer.zemris.nenr.ga.selection.TournamentCannonSelection;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -63,7 +60,5 @@ public class Main {
         geneticAlgorithm.train();
         System.out.println(geneticAlgorithm.getFittest());
         System.out.println(geneticAlgorithm.getHistory().stream().map(GeneticAlgorithmHistory::toString).collect(Collectors.joining("\n")));
-
-
     }
 }
