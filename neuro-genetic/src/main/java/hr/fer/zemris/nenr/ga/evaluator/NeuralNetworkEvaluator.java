@@ -63,7 +63,7 @@ public class NeuralNetworkEvaluator implements Evaluator<InstanceDouble> {
         function.apply(null);
         var params = instance.getChromosomes();
 
-        double[][] output = new double[layers.length][];
+        double[][] output = new double[layers.length - 1][];
         for (int i = 1; i < layers.length; i++) {
             output[i - 1] = new double[layers[i]];
         }
@@ -77,18 +77,18 @@ public class NeuralNetworkEvaluator implements Evaluator<InstanceDouble> {
             output[0][i] = 1.0 / (1.0 + sum);
         }
 
-        for (int layerIndex = 1; layerIndex < layers.length - 2; layerIndex++) {
+        for (int layerIndex = 1; layerIndex < layers.length - 1; layerIndex++) {
             for (int i = 0; i < layers[layerIndex + 1]; i++) {
                 double sum = 0;
                 for (int j = 0; j < layers[layerIndex]; j++) {
                     sum += output[layerIndex - 1][j] * params[index++];
                 }
                 sum += params[index++];
-                output[layerIndex][i] = 1.0 / (1.0 + Math.exp(sum));
+                output[layerIndex][i] = 1.0 / (1.0 + Math.exp(-sum));
             }
         }
 
-        return output[layers.length - 2];
+        return output[output.length - 1];
     }
 
     @Override
