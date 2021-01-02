@@ -3,7 +3,6 @@ package hr.fer.zemris.nenr.ga;
 import hr.fer.zemris.nenr.ga.domain.GASolution;
 import hr.fer.zemris.nenr.ga.evaluator.Evaluator;
 import hr.fer.zemris.nenr.ga.initializer.Initializer;
-import hr.fer.zemris.nenr.ga.mutator.Mutator;
 import hr.fer.zemris.nenr.ga.selection.Selection;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import static java.util.Comparator.comparing;
 
 public class GeneticAlgorithm<T extends GASolution<?>> {
 
-    private final Mutator<T> mutator;
     private final Evaluator<T> evaluator;
     private final Initializer<T> initializer;
     private final Selection<T> selection;
@@ -24,22 +22,22 @@ public class GeneticAlgorithm<T extends GASolution<?>> {
 
     private final List<T> population = new ArrayList<>();
 
-    public GeneticAlgorithm(Mutator<T> mutator, Evaluator<T> evaluator, Initializer<T> initializer, Selection<T> selection, int maxIterationCount, boolean keepHistory) {
+    public GeneticAlgorithm(Evaluator<T> evaluator, Initializer<T> initializer, Selection<T> selection, int maxIterationCount, boolean keepHistory) {
         this.maxIterationCount = maxIterationCount;
         this.initializer = initializer;
         this.evaluator = evaluator;
         this.selection = selection;
-        this.mutator = mutator;
         this.history = keepHistory ? new ArrayList<>() : null;
         this.function = evaluator.getFunction();
     }
 
     public void train() {
         population.addAll(initializer.initialize());
-        evaluatePopulation();
+        population.forEach(e -> e.setFitness(evaluator.evaluate(e)));
+
         for (int i = 0; function.getCounter() < maxIterationCount; i++) {
             selection.doSelection(population);
-            evaluatePopulation();
+            population.forEach(e -> e.setFitness(evaluator.evaluate(e)));
             conditionallySave(i + 1);
         }
     }
@@ -53,14 +51,6 @@ public class GeneticAlgorithm<T extends GASolution<?>> {
             }
         }
         history.add(new GeneticAlgorithmHistory<>(generation, populationFitness(), best));
-    }
-
-    public void evaluatePopulation() {
-        population.forEach(e -> e.setFitness(evaluator.evaluate(e)));
-    }
-
-    public void doMutation() {
-        population.forEach(mutator::mutate);
     }
 
     public T getFittest() {

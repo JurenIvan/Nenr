@@ -15,11 +15,11 @@ public class Dataset {
     private final int result;
 
     public Dataset(Path filePath, int totalArguments, int result) throws IOException {
+        this.totalArguments = totalArguments;
+        this.result = result;
         samples = readAllLines(filePath).stream()
                 .map(this::parseInput)
                 .collect(toList());
-        this.totalArguments = totalArguments;
-        this.result = result;
     }
 
     public double[] parseInput(String line) {
