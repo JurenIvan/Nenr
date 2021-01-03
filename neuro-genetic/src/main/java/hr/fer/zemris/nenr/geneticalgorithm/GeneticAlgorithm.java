@@ -33,11 +33,11 @@ public class GeneticAlgorithm<T extends GASolution<?>> {
 
     public void train() {
         population.addAll(initializer.initialize());
-        population.forEach(e -> e.setFitness(evaluator.evaluate(e)));
+        population.forEach(e -> e.setFitness(evaluator.evaluateErrorOnDataset(e)));
 
         for (int i = 0; function.getCounter() < maxIterationCount; i++) {
             selection.doSelection(population);
-            population.forEach(e -> e.setFitness(evaluator.evaluate(e)));
+            population.forEach(e -> e.setFitness(evaluator.evaluateErrorOnDataset(e)));
             conditionallySave(i + 1);
         }
     }

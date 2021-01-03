@@ -34,7 +34,7 @@ public class TournamentModifiedSelection<T extends GASolution<P>, P> implements 
 
             T child = breeder.mate(dad, mom);
             mutator.mutate(child);
-            child.setFitness(evaluator.evaluate(child));
+            child.setFitness(evaluator.evaluateErrorOnDataset(child));
             if (child.getFitness() < Math.max(dad.getFitness(), mom.getFitness()))
                 population.set(population.size() - replaced++, child);
         }

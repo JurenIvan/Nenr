@@ -43,9 +43,16 @@ public class FunctionEvaluatorBinary implements Evaluator<InstanceBinary> {
     }
 
     @Override
-    public double evaluate(InstanceBinary instance) {
+    public double evaluateErrorOnDataset(InstanceBinary instance) {
         var value = transformIntoDoubleRepresentation(instance.getChromosomes(), minValue, maxValue);
         return errorCollectingFunction.apply(0.0, function.apply(value));
+    }
+
+    @Override
+    public double[] predict(InstanceBinary instance, double[] sample) {
+        var result = new double[1];
+        result[0] = function.apply(transformIntoDoubleRepresentation(instance.getChromosomes(), minValue, maxValue));
+        return result;
     }
 
     @Override

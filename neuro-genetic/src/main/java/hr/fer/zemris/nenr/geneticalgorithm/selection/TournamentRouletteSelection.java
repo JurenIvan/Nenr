@@ -40,7 +40,7 @@ public class TournamentRouletteSelection<T extends GASolution<P>, P> implements 
 
             T child = breeder.mate(dad, mom);
             mutator.mutate(child);
-            child.setFitness(evaluator.evaluate(child));
+            child.setFitness(evaluator.evaluateErrorOnDataset(child));
 
             if (child.getFitness() > max(dad.getFitness(), mom.getFitness())) return;
             if (dad.getFitness() > max(child.getFitness(), mom.getFitness())) {

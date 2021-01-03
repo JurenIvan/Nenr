@@ -4,7 +4,9 @@ import hr.fer.zemris.nenr.geneticalgorithm.CountingFunction;
 
 public interface Evaluator<T> {
 
-    double evaluate(T instance);
+    double evaluateErrorOnDataset(T instance);
+
+    double[] predict(T instance, double[] sample);
 
     double[] evaluateDoubleValue(T instance);
 

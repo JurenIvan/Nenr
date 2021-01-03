@@ -34,7 +34,7 @@ public class TournamentSelection<T extends GASolution<P>, P> implements Selectio
 
             T child = breeder.mate(dad, mom);
             mutator.mutate(child);
-            child.setFitness(evaluator.evaluate(child));
+            child.setFitness(evaluator.evaluateErrorOnDataset(child));
             if (child.getFitness() > max(dad.getFitness(), mom.getFitness())) return;
             if (dad.getFitness() > max(child.getFitness(), mom.getFitness())) population.set(2 * i, child);
             if (mom.getFitness() > max(dad.getFitness(), child.getFitness())) population.set(2 * i + 1, child);

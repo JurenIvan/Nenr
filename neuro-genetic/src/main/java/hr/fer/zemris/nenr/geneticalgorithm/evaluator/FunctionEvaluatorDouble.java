@@ -19,8 +19,15 @@ public class FunctionEvaluatorDouble implements Evaluator<InstanceDouble> {
         this.errorCollectingFuction = errorCollectingFuction;
     }
 
-    public double evaluate(InstanceDouble instance) {
+    public double evaluateErrorOnDataset(InstanceDouble instance) {
         return errorCollectingFuction.apply(0.0, function.apply(instance.getChromosomes()));
+    }
+
+    @Override
+    public double[] predict(InstanceDouble instance, double[] sample) {
+        var result = new double[1];
+        result[0] = function.apply(instance.getChromosomes());
+        return result;
     }
 
     @Override

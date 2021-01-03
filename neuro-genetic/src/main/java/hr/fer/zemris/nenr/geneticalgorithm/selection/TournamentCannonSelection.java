@@ -50,7 +50,7 @@ public class TournamentCannonSelection<T extends GASolution<P>, P> implements Se
         if (population.get(a).getFitness() > max(population.get(b).getFitness(), population.get(c).getFitness())) {  //i3 is worst
             var child = breeder.mate(population.get(b), population.get(c));
             mutator.mutate(child);
-            child.setFitness(evaluator.evaluate(child));
+            child.setFitness(evaluator.evaluateErrorOnDataset(child));
             if (child.getFitness() < population.get(a).getFitness()) {
                 population.set(a, child);
                 return true;

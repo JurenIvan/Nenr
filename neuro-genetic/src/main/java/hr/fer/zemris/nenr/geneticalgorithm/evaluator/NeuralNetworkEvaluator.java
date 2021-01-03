@@ -47,10 +47,10 @@ public class NeuralNetworkEvaluator implements Evaluator<InstanceDouble> {
     }
 
     @Override
-    public double evaluate(InstanceDouble instance) {
+    public double evaluateErrorOnDataset(InstanceDouble instance) {
         double err = 0;
         for (var sample : dataset.getSamples()) {
-            var result = calculateOutput(instance, sample);
+            var result = predict(instance, sample);
             int inCount = dataset.getTotalArguments() - dataset.getResult();
             for (int i = inCount; i < dataset.getTotalArguments(); i++) {
                 err += errorCollectingFunction.apply(result[i - inCount], sample[i]);
@@ -59,7 +59,8 @@ public class NeuralNetworkEvaluator implements Evaluator<InstanceDouble> {
         return err / dataset.size();
     }
 
-    private double[] calculateOutput(InstanceDouble instance, double[] sample) {
+    @Override
+    public double[] predict(InstanceDouble instance, double[] sample) {
         function.apply(null);
         var params = instance.getChromosomes();
 
