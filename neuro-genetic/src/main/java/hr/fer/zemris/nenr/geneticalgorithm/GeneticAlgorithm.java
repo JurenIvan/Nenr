@@ -50,7 +50,8 @@ public class GeneticAlgorithm<T extends GASolution<?>> {
                 best = population.get(i);
             }
         }
-        history.add(new GeneticAlgorithmHistory<>(generation, populationFitness(), best));
+//        history.add(new GeneticAlgorithmHistory<>(generation, populationFitness(), best));
+        System.out.println(generation + " " + populationFitness() + " " + best.getFitness());
     }
 
     public T getFittest() {

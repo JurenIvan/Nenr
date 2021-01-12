@@ -1,0 +1,6 @@
+Kada biste morali ručno odrediti vrijednosti svih parametara
+upravo zadane neuronske mreže, na koje biste ih vrijednosti postavili i zašto?
+
+Čime biste se vodili prilikom odredivanja parametara neurona skrivenog sloja
+a čime prilikom odredivanja parametara neurona izlaznog sloja. Nacrtajte
+tu neuronsku mrežu i na njoj prikažite vrijednosti svih parametara.

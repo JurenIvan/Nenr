@@ -54,7 +54,7 @@ public class Task4 {
 
         var picker = new RouletteWheel();   //doest work with random picker
         var selector = new TournamentNSelection<>(breeder, evaluator, mutator, picker, 20, 20);
-        var geneticAlgorithm = new GeneticAlgorithm<>(evaluator, populationInitializer, selector, 1_000_000_000, true);
+        var geneticAlgorithm = new GeneticAlgorithm<>(evaluator, populationInitializer, selector, 500_000_00, true);
 
         geneticAlgorithm.train();
         System.out.println(geneticAlgorithm.getFittest().getFitness());
@@ -89,7 +89,6 @@ public class Task4 {
             if (result[2] > Math.max(result[0], result[1]))
                 fileDiscreteStringBuilder.append(String.format("%s %s %s %s %s%n", sample[0], sample[1], 0, 0, 1));
         }
-
 
         Files.writeString(Path.of(outPathRoot + "xy.data"), fileXYStringBuilder.toString());
         Files.writeString(Path.of(outPathRoot + "xy_with_s.data"), fileXYWithSStringBuilder.toString());

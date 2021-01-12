@@ -56,12 +56,12 @@ public class NeuralNetworkEvaluator implements Evaluator<InstanceDouble> {
                 err += errorCollectingFunction.apply(result[i - inCount], sample[i]);
             }
         }
+        function.apply(null);
         return err / dataset.size();
     }
 
     @Override
     public double[] predict(InstanceDouble instance, double[] sample) {
-        function.apply(null);
         var params = instance.getChromosomes();
 
         double[][] output = new double[layers.length - 1][];
