@@ -1,0 +1,2 @@
+Sukladno objasnjenu predhodnog zadatka, i ovaj put je tipicni neuronski dio mreze dovoljno kapacitivan da nauci sve sto se izgubi ne smjestanjem potpornih neurona u centre.
+U odnosu na 4. mrezu izgubili smo smisao u prvom dijelu mreze, odnosno,

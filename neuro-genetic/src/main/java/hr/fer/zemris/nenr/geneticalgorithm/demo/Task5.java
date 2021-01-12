@@ -54,7 +54,7 @@ public class Task5 {
 
         var picker = new RouletteWheel();   //doest work with random picker
         var selector = new TournamentNSelection<>(breeder, evaluator, mutator, picker, 20, 20);
-        var geneticAlgorithm = new GeneticAlgorithm<>(evaluator, populationInitializer, selector, 1_000_000_000, true);
+        var geneticAlgorithm = new GeneticAlgorithm<>(evaluator, populationInitializer, selector, 250_000_00, true);
 
         geneticAlgorithm.train();
         System.out.println(geneticAlgorithm.getFittest().getFitness());
@@ -94,6 +94,7 @@ public class Task5 {
         Files.writeString(Path.of(outPathRoot + "xy_with_s.data"), fileXYWithSStringBuilder.toString());
         Files.writeString(Path.of(outPathRoot + "continuous.data"), fileContinuousStringBuilder.toString());
         Files.writeString(Path.of(outPathRoot + "discrete.data"), fileDiscreteStringBuilder.toString());
+        Files.writeString(Path.of(outPathRoot + "best.data"), geneticAlgorithm.getFittest().toString());
     }
 
     public static double ci(double x) {

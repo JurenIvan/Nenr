@@ -1,0 +1,3 @@
+Postupak je trajao duze zato sto ima vise tezina za nauciti, postupak je uspio doci do 10^-123 tocnosti nakon 7 minuta treniranja,
+ako gledamo ove potporne vektore oni su izgubili smisao zato sto je neuronski dio (4x3)
+dovoljno kapacitivan da moze odrediti mapiranja bez da smjesti potporne neurone u sredine.
