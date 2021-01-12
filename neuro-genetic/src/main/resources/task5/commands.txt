@@ -18,8 +18,8 @@ plot "/Users/ivanjuren/IdeaProjects/nenr/neuro-genetic/src/main/resources/task5/
 set title "XY prototypes"
 set xlabel "x"
 set ylabel "y"
-set xrange [-5:3]
-set yrange [-2:4]
+set xrange [0:1]
+set yrange [-0.5:1]
 plot "/Users/ivanjuren/IdeaProjects/nenr/neuro-genetic/src/main/resources/task5/xy.data" using 1:2:0 with point pointtype 5, "/Users/ivanjuren/IdeaProjects/nenr/neuro-genetic/src/main/resources/dataset.txt" using 1:2:(rgb($3,$4,$5)) with point pointtype 5 lc rgb var
 
 
